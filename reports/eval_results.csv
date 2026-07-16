@@ -1,0 +1,9 @@
+question,gold,v1_correct,v1_det,v2_correct,v2_det
+Which course is the most competitive?,Ethnographic Customer Insights,0.0,0,1.0,1
+What is the best course?,Global Entrepreneurial Finance,0.0,1,1.0,1
+Which course is the least competitive?,Financial Accounting,0.4,0,1.0,1
+What is the lowest rated course?,Managing Health Care Services in a Value Based Setting,0.0,0,1.0,1
+Which marketing course is the most competitive?,Ethnographic Customer Insights,0.0,1,1.0,1
+What is the best finance course?,Global Entrepreneurial Finance,0.0,1,1.0,1
+Which strategy course is the most competitive?,Organizational Growth and Transformation,0.0,1,1.0,1
+What is the best accounting course?,Financial Reporting and Analysis,0.0,1,1.0,1

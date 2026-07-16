@@ -1,0 +1,44 @@
+version: 1
+owner: "Program office (definitional authority)"
+
+entities:
+  course:
+    key: course_code
+    table: dim_course
+
+dimensions:
+  area:
+    table: dim_course
+    column: area
+    description: "Subject-area prefix of the course code (e.g. MKTG, FINC, ACCT)."
+
+metrics:
+  competitiveness:
+    label: "Course Competitiveness"
+    description: >
+      How hard a course is to get into: the Phase 1 closing cost (clearing bid in
+      points) from the main auction, for the MOST RECENT term the course was offered,
+      averaged across that term's sections. Higher = more competitive.
+    source: fct_bids
+    measure: closing_cost
+    aggregation: avg
+    weight: null
+    filters:
+      - "phase_num = 1"
+    time_basis: most_recent_term
+    grain: course
+
+  course_rating:
+    label: "Course Rating"
+    description: >
+      Overall course quality: the response-weighted average of the Global (overall)
+      TCE score for the MOST RECENT term offered, counting only sections with at least
+      10 responses to avoid small-sample noise. Higher = better rated.
+    source: fct_tce
+    measure: score_global
+    aggregation: response_weighted_avg
+    weight: total_responses
+    filters:
+      - "total_responses >= 10"
+    time_basis: most_recent_term
+    grain: course

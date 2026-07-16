@@ -1,0 +1,16 @@
+# secrets
+.env
+
+# python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# derived database (rebuilt from data/raw by scripts/01_load.py)
+db/*.duckdb
+
+# proprietary source data — NOT committed (bring your own export)
+data/raw/*.csv
+
+# os
+.DS_Store
