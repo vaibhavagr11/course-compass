@@ -64,17 +64,18 @@ Encoded once in `semantic_layer/metrics.yml`:
   *most recent term*, counting only sections with **≥ 10 responses** (to kill small-sample
   noise).
 
-## What's next (Phase 2 — in progress)
+## The interactive web app (Phase 2 — built)
 
-An interactive **web app** so you can ask your own questions in a browser and watch the
-two agents answer side by side:
+Ask your own questions in the browser and watch both agents answer side by side:
 
-- **Backend:** FastAPI wrapping the existing engine (`/api/ask`, `/api/consistency`).
+![Course Compass web app](docs/app.png)
+
+- **Backend:** FastAPI wrapping the engine (`/api/ask`, `/api/consistency`).
 - **Frontend:** React (Vite) — one question box, two panels (V1 naive vs V2 semantic),
   each showing the answer, the generated SQL / semantic request, the results table, and
   (for V2) the governed definition it used.
-- **Live consistency check:** a "Run 5×" button that shows V1's answer wobbling while V2
-  stays fixed — the demo, live.
+- **Live consistency check:** a "Run 5×" button — V1 wobbles across several answers (red),
+  V2 stays fixed at one (green). The determinism story, interactive.
 
 ## Repository structure
 
@@ -92,8 +93,10 @@ course-compass/
 │   ├── 04_semantic_test.py
 │   ├── 05_v2_agent.py   # semantic agent
 │   └── 06_eval.py       # golden-set eval + chart
-├── backend/             # (Phase 2) FastAPI engine + API
+├── backend/             # FastAPI engine + API (engine.py, main.py)
+├── frontend/            # React (Vite) app — side-by-side V1 vs V2 UI
 ├── reports/             # eval chart + results CSV
+├── docs/                # screenshots
 └── README.md
 ```
 
@@ -118,6 +121,18 @@ uv run scripts/03_v1_agent.py        # naive agent (inconsistent)
 uv run scripts/05_v2_agent.py        # semantic agent (consistent)
 uv run scripts/06_eval.py            # eval + before/after chart
 ```
+
+### Run the web app
+
+```bash
+# terminal 1 — backend API
+uv run uvicorn backend.main:app --reload --port 8000
+
+# terminal 2 — frontend
+cd frontend && npm install && npm run dev
+```
+
+Then open http://localhost:5173 and ask a question.
 
 ## Data
 
