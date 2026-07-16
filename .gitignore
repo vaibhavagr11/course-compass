@@ -14,3 +14,7 @@ data/raw/*.csv
 
 # os
 .DS_Store
+
+# node
+node_modules/
+frontend/dist/
